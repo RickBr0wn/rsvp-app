@@ -6,21 +6,39 @@ class App extends Component {
 		guests: [
 			{
 				name: 'Treasure',
-				isConfirmed: false
+				isConfirmed: false,
+				isEditing: false
 			},
 			{
 				name: 'Nic',
-				isConfirmed: true
+				isConfirmed: true,
+				isEditing: false
 			},
 			{
 				name: 'Matt K',
-				isConfirmed: true
+				isConfirmed: true,
+				isEditing: true
 			}
 		]
 	}
 
-	getTotalInvited = () => this.state.guests.length;
+	toggleGuestPropertyAt = (property, indexToChange) => {
+		this.setState({
+			guests: this.state.guests.map((guest, index) => {
+				if(index === indexToChange){
+					return{
+						...guest,
+						[property]: !guest[property]
+					}
+				}
+				return guest
+			})
+		})
+	}
 
+	toggleConfirmationAt = index => this.toggleGuestPropertyAt("isConfirmed", index)
+	toggleEditingAt = index => this.toggleGuestPropertyAt("isEditing", index)
+	getTotalInvited = () => this.state.guests.length;
 	// getAttendingGuests = () =>
 	// getUnconfirmedGuests = () =>
 
@@ -28,8 +46,8 @@ class App extends Component {
 		return (
 			<div className="App">
 				<header>
-					<h1>Saving Jars</h1>
-					<p>An app to help Michelle monitor her savings</p>
+					<h1>RSVP</h1>
+					<p>A TreeHouse App</p>
 					<form>
 						<input type="text" value="Safia" placeholder="Invite Someone" />
 						<button type="submit" name="submit" value="submit">Submit</button>
@@ -59,7 +77,9 @@ class App extends Component {
 						</tbody>
 					</table>
 					
-					<GuestList guests={this.state.guests} />
+					<GuestList 	guests={this.state.guests} 
+											toggleConfirmationAt={this.toggleConfirmationAt}
+											toggleEditingAt={this.toggleEditingAt} />
 
 				</div>
 			</div>
