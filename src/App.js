@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import GuestList from './GuestList'
 
 class App extends Component {
 	state = {
@@ -10,6 +10,10 @@ class App extends Component {
 			},
 			{
 				name: 'Nic',
+				isConfirmed: true
+			},
+			{
+				name: 'Matt K',
 				isConfirmed: true
 			}
 		]
@@ -24,8 +28,8 @@ class App extends Component {
 		return (
 			<div className="App">
 				<header>
-					<h1>RSVP</h1>
-					<p>A Treehouse App</p>
+					<h1>Saving Jars</h1>
+					<p>An app to help Michelle monitor her savings</p>
 					<form>
 						<input type="text" value="Safia" placeholder="Invite Someone" />
 						<button type="submit" name="submit" value="submit">Submit</button>
@@ -54,35 +58,12 @@ class App extends Component {
 						</tr>
 						</tbody>
 					</table>
-					<ul>
-						<li className="pending"><span>Safia</span></li>
-						<li className="responded"><span>Iver</span>
-							<label>
-								<input type="checkbox" checked /> Confirmed
-							</label>
-							<button>edit</button>
-							<button>remove</button>
-						</li>
-						<li className="responded">
-							<span>Corrina</span>
-							<label>
-								<input type="checkbox" checked /> Confirmed
-							</label>
-							<button>edit</button>
-							<button>remove</button>
-						</li>
-						<li>
-							<span>Joel</span>
-							<label>
-								<input type="checkbox" /> Confirmed
-							</label>
-							<button>edit</button>
-							<button>remove</button>
-						</li>
-					</ul>
+					
+					<GuestList guests={this.state.guests} />
+
 				</div>
 			</div>
-		);
+		)
   	}
 }
 
